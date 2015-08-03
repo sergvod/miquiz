@@ -22,6 +22,7 @@ node_modules/
 
 # Base de datos sqlite local
 quiz.sqlite
+.env
 
 # =========================
 # Operating System Files
