@@ -46,3 +46,21 @@ exports.answer = function(req, res) {
 	}
 	res.render('quizzes/answer', {quiz: req.quiz, respuesta: resultado});
 };
+
+// GET /quizzes/new
+exports.new = function(req, res) {
+	var quiz = models.Quiz.build(	// Crea objeto Quiz
+		{pregunta: "Pregunta", respuesta: "Respuesta"}
+	);
+	res.render('quizzes/new', {quiz: quiz});
+};
+
+// POST /quizzes/create
+exports.create = function(req, res) {
+	var quiz = models.Quiz.build(req.body.quiz);
+
+	// Guarda en DB los campos pregunta y respuesta de quiz
+	quiz.save({fields: ["pregunta", "respuesta"]})
+		.then(function() {res.redirect('/quizzes');
+	})	// Redirección HTTP (URL relativo) lista de preguntas
+};
